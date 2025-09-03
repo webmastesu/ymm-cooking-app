@@ -1,0 +1,20 @@
+# app-ads.txt for YMM COOKING
+# This file is used to authorize digital sellers for mobile app advertising
+
+# Format: <FIELD #1>, <FIELD #2>, <FIELD #3>, <FIELD #4>
+# FIELD #1: Exchange domain name
+# FIELD #2: Publisher's Account ID  
+# FIELD #3: Type of Account/Relationship
+# FIELD #4: Certification Authority ID
+
+# Google AdMob (placeholder - replace with actual publisher ID)
+google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+
+# Facebook Audience Network (placeholder - replace with actual publisher ID)
+facebook.com, 000000000000000, RESELLER, c3e20eee3f780d68
+
+# Unity Ads (placeholder - replace with actual publisher ID)
+unity3d.com, 0000000, DIRECT, 96cabb5fbdde37a7
+
+# Additional ad networks can be added here
+# Replace placeholder IDs with actual publisher IDs when available
