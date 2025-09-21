@@ -1,7 +1,7 @@
 "use client"
 
-import AppCubeSafe from "@/components/app-cube-safe"
+import AppPreview from "@/components/app-preview"
 
 export default function AppCubeClient() {
-  return <AppCubeSafe />
+  return <AppPreview />
 }
