@@ -11,10 +11,14 @@ import VerificationModal from "@/components/verification-modal"
 export default function HomePage() {
   const [showVerification, setShowVerification] = useState(true)
   const [isVerified, setIsVerified] = useState(false)
+  const [isContentReady, setIsContentReady] = useState(false)
 
   const handleVerificationSuccess = () => {
     setIsVerified(true)
     setShowVerification(false)
+    setTimeout(() => {
+      setIsContentReady(true)
+    }, 500)
   }
 
   const handleDownloadClick = () => {
@@ -38,6 +42,18 @@ export default function HomePage() {
             <p className="text-muted-foreground">Loading...</p>
           </div>
         )}
+      </div>
+    )
+  }
+
+  if (!isContentReady) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <ChefHat className="h-16 w-16 text-primary mx-auto mb-4 animate-pulse" />
+          <h1 className="text-2xl font-bold text-foreground mb-2">YMM COOKING</h1>
+          <p className="text-muted-foreground">Preparing your cooking experience...</p>
+        </div>
       </div>
     )
   }
@@ -196,9 +212,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center">
-              <AppCubeClient />
-            </div>
+            <div className="flex justify-center">{isContentReady && <AppCubeClient />}</div>
           </div>
         </div>
       </section>
