@@ -1,7 +1,7 @@
 "use client"
 
 import { Canvas, useFrame } from "@react-three/fiber"
-import { useRef, useState } from "react"
+import { useRef, useState, Suspense } from "react"
 import type { Mesh } from "three"
 import { useTexture } from "@react-three/drei"
 
@@ -30,9 +30,9 @@ function RotatingCube() {
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
       scale={hovered ? 1.1 : 1}
-      rotation={[0.2, 0, 0]} // Changed from -0.2 to 0.2 to tilt forward instead of backward
+      rotation={[0.2, 0, 0]}
     >
-      <boxGeometry args={[3, 4.5, 3]} /> {/* Increased height from 3.8 to 4.5 to make it taller */}
+      <boxGeometry args={[3, 4.5, 3]} />
       {textures.map((texture, index) => (
         <meshStandardMaterial key={index} attach={`material-${index}`} map={texture} />
       ))}
@@ -40,13 +40,31 @@ function RotatingCube() {
   )
 }
 
+function CubeFallback() {
+  return (
+    <div className="w-full h-[500px] flex items-center justify-center">
+      <div className="animate-pulse bg-gradient-to-br from-orange-100 to-lime-100 rounded-lg w-64 h-64 flex items-center justify-center">
+        <span className="text-gray-500">Loading 3D...</span>
+      </div>
+    </div>
+  )
+}
+
 export default function AppCube() {
   return (
     <div className="w-full h-[500px]">
-      <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
+      <Canvas
+        camera={{ position: [0, 0, 8], fov: 50 }}
+        gl={{ antialias: true, alpha: true }}
+        onCreated={({ gl }) => {
+          gl.setClearColor(0x000000, 0)
+        }}
+      >
         <ambientLight intensity={0.6} />
         <directionalLight position={[10, 10, 5]} intensity={1} />
-        <RotatingCube />
+        <Suspense fallback={<CubeFallback />}>
+          <RotatingCube />
+        </Suspense>
       </Canvas>
     </div>
   )
