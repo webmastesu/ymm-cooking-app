@@ -1,10 +1,47 @@
+"use client"
+
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ChefHat, Clock, Heart, Star, Users, Utensils } from "lucide-react"
 import Link from "next/link"
 import AppCubeClient from "@/components/app-cube-client"
+import VerificationModal from "@/components/verification-modal"
 
 export default function HomePage() {
+  const [showVerification, setShowVerification] = useState(true)
+  const [isVerified, setIsVerified] = useState(false)
+
+  const handleVerificationSuccess = () => {
+    setIsVerified(true)
+    setShowVerification(false)
+  }
+
+  const handleDownloadClick = () => {
+    const encodedUrl = "aHR0cHM6Ly9wbGF5Lmdvb2dsZS5jb20vc3RvcmUvYXBwcy9kZXRhaWxzP2lkPWNvbS55bW1jb29raW5nLmFwcA=="
+    const decodedUrl = atob(encodedUrl)
+    window.open(decodedUrl, "_blank")
+  }
+
+  if (!isVerified) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <VerificationModal
+          isOpen={showVerification}
+          onClose={() => setShowVerification(false)}
+          onSuccess={handleVerificationSuccess}
+        />
+        {!showVerification && (
+          <div className="text-center">
+            <ChefHat className="h-16 w-16 text-primary mx-auto mb-4" />
+            <h1 className="text-2xl font-bold text-foreground mb-2">YMM COOKING</h1>
+            <p className="text-muted-foreground">Loading...</p>
+          </div>
+        )}
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen bg-background">
       {/* Navigation */}
@@ -21,6 +58,9 @@ export default function HomePage() {
               </Link>
               <Link href="/terms" className="text-foreground hover:text-primary transition-colors">
                 Terms
+              </Link>
+              <Link href="/privacy-policy" className="text-foreground hover:text-primary transition-colors">
+                Privacy Policy
               </Link>
               <Link href="/contact" className="text-foreground hover:text-primary transition-colors">
                 Contact
@@ -50,7 +90,11 @@ export default function HomePage() {
               our step-by-step guides and video tutorials.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3">
+              <Button
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3"
+                onClick={handleDownloadClick}
+              >
                 <svg className="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
                 </svg>
@@ -167,7 +211,11 @@ export default function HomePage() {
             <p className="text-lg text-muted-foreground mb-8">
               Download YMM COOKING now and discover thousands of delicious recipes from Myanmar and around the world.
             </p>
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3">
+            <Button
+              size="lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground px-8 py-3"
+              onClick={handleDownloadClick}
+            >
               <svg className="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.61 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.53,12.9 20.18,13.18L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
               </svg>
@@ -194,7 +242,13 @@ export default function HomePage() {
               <h3 className="font-semibold mb-4">Quick Links</h3>
               <div className="space-y-2">
                 <Link href="/terms" className="block text-background/80 hover:text-background transition-colors">
-                  Terms & Privacy Policy
+                  Terms of Service
+                </Link>
+                <Link
+                  href="/privacy-policy"
+                  className="block text-background/80 hover:text-background transition-colors"
+                >
+                  Privacy Policy
                 </Link>
                 <Link href="/contact" className="block text-background/80 hover:text-background transition-colors">
                   Contact Us
