@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { X } from "lucide-react"
 
 interface VerificationModalProps {
@@ -98,6 +98,9 @@ export default function VerificationModal({ isOpen, onClose, onSuccess }: Verifi
               <X className="h-4 w-4" />
             </Button>
           </DialogTitle>
+          <DialogDescription>
+            Please answer the question below to verify you are human and continue to the app.
+          </DialogDescription>
         </DialogHeader>
 
         <div className="space-y-4">
