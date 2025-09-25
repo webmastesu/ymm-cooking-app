@@ -8,7 +8,7 @@
 # FIELD #4: Certification Authority ID
 
 # Google AdMob (placeholder - replace with actual publisher ID)
-google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0
+google.com, pub-7994314163564025, DIRECT, f08c47fec0942fa0
 
 # Facebook Audience Network (placeholder - replace with actual publisher ID)
 facebook.com, 000000000000000, RESELLER, c3e20eee3f780d68
